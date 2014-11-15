@@ -1,0 +1,115 @@
+<h1>SignIn#default</h1>
+<p>Find me in app/views/sign_in/default.html.erb</p>
+<button onclick="logout()">logout</button>
+
+<script type="in/Login">
+Hello, <?js= firstName ?> <?js= lastName ?>.
+</script>
+
+<script type="text/javascript" src="http://platform.linkedin.com/in.js">
+    api_key: 77f36tj3brzevw
+    onLoad: onLinkedInLoad
+    authorize: true
+</script>
+
+<script type="text/javascript">
+    function logout() {
+        IN.User.logout(onLinkedInLogout());
+    }
+
+    function onLinkedInLogout() {}
+
+    function onLinkedInLoad() {
+        IN.Event.on(IN, "auth", onLinkedInAuth);
+    }
+
+    function onLinkedInAuth() {
+        IN.API.Profile("me").fields(
+                [
+                    "id",
+                    "first-name",
+                    "last-name",
+                    "headline",
+                    "picture-url",
+                    "industry",
+                    "summary",
+                    "specialties",
+                    "positions:(id,title,summary,start-date,end-date,is-current,company:(id,name,type,size,industry,ticker))",
+                    "educations:(id,school-name,field-of-study,start-date,end-date,degree,activities,notes)",
+                    "associations",
+                    "interests",
+                    "num-recommenders",
+                    "date-of-birth",
+                    "publications:(id,title,publisher:(name),authors:(idname),date,url,summary)",
+                    "patents:(id,title,summary,number,status:(idname),office:(name),inventors:(idname),date,url)",
+                    "languages:(id,language:(name),proficiency:(levelname))",
+                     "skills:(id,skill:(name))",
+                     "certifications:(id,name,authority:(name),number,start-date,end-date)",
+                     "courses:(id,name,number)",
+                     "recommendations-received:(id,recommendation-type,recommendation-text,recommender)",
+                     "honors-awards",
+                     "three-current-positions",
+                     "three-past-positions",
+                     "volunteer"
+                ]
+        ).result(displayProfiles);
+
+    /*,
+     "skills:(id,skill:(name))",
+     "certifications:(id,name,authority:(name),number,start-date,end-date)",
+     "courses:(id,name,number)",
+     "recommendations-received:(id,recommendation-type,recommendation-text,recommender)",
+     "honors-awards",
+     "three-current-positions",
+     "three-past-positions",
+     "volunteer"
+     */
+
+    }
+
+    function displayProfiles(profiles) {
+        console.log(profiles)
+    }
+  /*
+    function linkedInSignup() {
+        IN.User.authorize(linkedInLoginCall);
+    }
+
+    function linkedInLoginCall() {
+        if (IN.User.isAuthorized()) {
+            console.log('authorized');
+            IN.API.Profile("me").fields(
+                    [
+                        "id",
+                        "first-name",
+                        "last-name",
+                        "headline",
+                        "picture-url",
+                        "industry",
+                        "summary",
+                        "specialties",
+                        "positions:(id,title,summary,start-date,end-date,is-current,company:(id,name,type,size,industry,ticker))",
+                        "educations:(id,school-name,field-of-study,start-date,end-date,degree,activities,notes)",
+                        "associations",
+                        "interests",
+                        "num-recommenders",
+                        "date-of-birth",
+                        "publications:(id,title,publisher:(name),authors:(idname),date,url,summary)",
+                        "patents:(id,title,summary,number,status:(idname),office:(name),inventors:(idname),date,url)",
+                        "languages:(id,language:(name),proficiency:(levelname))"/*,
+                        "skills:(id,skill:(name))",
+                        "certifications:(id,name,authority:(name),number,start-date,end-date)",
+                        "courses:(id,name,number)",
+                        "recommendations-received:(id,recommendation-type,recommendation-text,recommender)",
+                        "honors-awards",
+                        "three-current-positions",
+                        "three-past-positions",
+                        "volunteer"
+                    ]
+                        ).result(function(me) {
+                console.log(me);
+            });
+        }
+    }
+    */
+</script>
