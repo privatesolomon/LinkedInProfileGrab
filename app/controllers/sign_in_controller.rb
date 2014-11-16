@@ -27,8 +27,15 @@ class SignInController < ApplicationController
     code = params[:code]
     state = params[:state]
 
+
+
+
+
+
+
     if !state.eql?(STATE)
       #Reject the request as it may be a result of CSRF
+      send_data 'state error', :type =>"text/plan", :disposition =>'inline'
     else
       #Get token object, passing in the authorization code from the previous step
       token = client.auth_code.get_token(code, :redirect_uri => REDIRECT_URI)
@@ -40,20 +47,17 @@ class SignInController < ApplicationController
                                                        :header_format => 'Bearer %s'
                                                    })
 
+      send_data 'ok so far', :type =>"text/plan", :disposition =>'inline'
+
       #Use the access token to make an authenticated API call
-      response = access_token.get('https://api.linkedin.com/v1/people/~')
+      #response = access_token.get('https://api.linkedin.com/v1/people/~')
 
       #Print body of response to command line window
-      puts response.body
+      #puts response.body
 
-      # Handle HTTP responses
-      case response
-        when Net::HTTPUnauthorized
-          # Handle 401 Unauthorized response
-        when Net::HTTPForbidden
-          # Handle 403 Forbidden response
-      end
+
     end
+
   end
 
 end
