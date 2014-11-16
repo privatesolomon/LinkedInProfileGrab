@@ -10,6 +10,8 @@ group :development, :test do # <<<< :development, not devlopment
   gem 'sqlite3'
 end
 
+
+
 #gem 'sqlite3'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
