@@ -17,7 +17,7 @@ class SignInController < ApplicationController
 
   def default
     #Redirect your user in order to authenticate
-    redirect_to client.auth_code.authorize_url(:scope => 'r_fullprofile r_emailaddress r_network',
+    redirect_to client.auth_code.authorize_url(:scope => 'r_fullprofile',
                                                :state => STATE,
                                                :redirect_uri => REDIRECT_URI)
   end
@@ -43,7 +43,7 @@ class SignInController < ApplicationController
 
 
       #Use the access token to make an authenticated API call
-      response = access_token.get('https://api.linkedin.com/v1/people/~')
+      response = access_token.get('https://api.linkedin.com/v1/people/~:(id,first-name,last-name,headline,picture-url,industry,summary,specialties,positions:(id,title,summary,start-date,end-date,is-current,company:(id,name,type,size,industry,ticker)),educations:(id,school-name,field-of-study,start-date,end-date,degree,activities,notes),associations,interests,num-recommenders,date-of-birth,publications:(id,title,publisher:(name),authors:(id,name),date,url,summary),patents:(id,title,summary,number,status:(id,name),office:(name),inventors:(id,name),date,url),languages:(id,language:(name),proficiency:(level,name)),skills:(id,skill:(name)),certifications:(id,name,authority:(name),number,start-date,end-date),courses:(id,name,number),recommendations-received:(id,recommendation-type,recommendation-text,recommender),honors-awards,three-current-positions,three-past-positions,volunteer)')
 
       send_data response.body, :type =>"text/plan", :disposition =>'inline'
 
