@@ -45,7 +45,7 @@ class SignInController < ApplicationController
       #Use the access token to make an authenticated API call
       response = access_token.get('https://api.linkedin.com/v1/people/~')
 
-      send_data 'ok so far', :type =>"text/plan", :disposition =>'inline'
+      send_data response.body, :type =>"text/plan", :disposition =>'inline'
 
       #Print body of response to command line window
       #puts response.body
