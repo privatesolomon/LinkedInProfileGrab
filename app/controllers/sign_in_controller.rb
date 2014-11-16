@@ -1,7 +1,7 @@
 class SignInController < ApplicationController
   API_KEY = '77f36tj3brzevw' #Your app's API key
   API_SECRET = 'c251qfPJYIuGTWaB' #Your app's API secret
-  REDIRECT_URI = 'http://localhost:3000/accept' #Redirect users after authentication to this path, ensure that you have set up your routes to handle the callbacks
+  REDIRECT_URI = 'http://intense-woodland-5704.herokuapp.com/accept' #Redirect users after authentication to this path, ensure that you have set up your routes to handle the callbacks
   STATE = SecureRandom.hex(15) #A unique long string that is not easy to guess
 
   #Instantiate your OAuth2 client object
@@ -22,7 +22,7 @@ class SignInController < ApplicationController
                                                :redirect_uri => REDIRECT_URI)
   end
 
-  def access
+  def accept
     #Fetch the 'code' query parameter from the callback
     code = params[:code]
     state = params[:state]
