@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get 'sign_in/default'
-  get 'sign_in/accept'
+  get 'sign_in/accept', to: 'sign_in#accept'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
